@@ -38,3 +38,6 @@ lerna-debug.log*
 
 # Testing
 coverage/
+
+*storybook.log
+storybook-static
