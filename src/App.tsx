@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { Navbar } from './components/layout/Navbar'
 import { AppRoutes } from './router'
 import { ErrorBoundary } from './components/error/ErrorBoundary'
@@ -16,6 +17,7 @@ export default function App() {
         </div>
         <Toaster />
       </ErrorBoundary>
+      <Analytics />
     </BrowserRouter>
   )
 }
