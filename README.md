@@ -3,9 +3,10 @@
 > Senior Software Engineer (Frontend AI Focused) Assessment Submission
 
 ## 🔗 Links
-- **Figma Design**: [FIGMA_URL_HERE]
-- **Live Application**: [LIVE_URL_HERE]
-- **Repository**: [REPO_URL_HERE]
+
+- **Design System (Chromatic Storybook)**: [Design Tokens & Components](https://6a25b1ee7adf79f1c5deb5f0-kupidybntn.chromatic.com/?path=/story/foundation-design-tokens--tokens)
+- **Live Application**: [cook-ai-assessment.vercel.app](https://cook-ai-assessment.vercel.app/)
+- **Repository**: [github.com/Sithija97/Cook-Ai-Assessment](https://github.com/Sithija97/Cook-Ai-Assessment)
 
 ## 📸 Features Overview
 
@@ -25,16 +26,67 @@
 - ✅ Error boundaries on every route
 - ✅ Optimistic UI for favorites
 
+## 🗺 User Flow
+
+```mermaid
+flowchart TD
+    Start([User Opens App]) --> Home
+
+    Home[🏠 Home / AI Search Page]
+    Home --> SearchInput["Enter ingredients, dietary\npreferences, cravings or\nnatural language query"]
+    Home --> NavFav[Navigate to Favorites]
+    Home --> NavMeal[Navigate to Meal Planner]
+    Home --> NavChat[Navigate to Cooking Assistant]
+
+    SearchInput --> Recs["🍽 AI Recipe Recommendations\nStreaming card-by-card reveal"]
+
+    Recs --> CardClick[Click Recipe Card]
+    Recs --> QuickFav[Quick Favorite from Card]
+    Recs --> BackSearch[Refine Search]
+
+    CardClick --> Detail["📄 Recipe Detail Page\nIngredients · Steps · AI Tips · Difficulty"]
+    QuickFav --> Favs
+    BackSearch --> Home
+
+    Detail --> FavDetail[Favorite / Unfavorite]
+    Detail --> AskAI[Ask AI about this recipe]
+    Detail --> StepProgress[Follow Step-by-Step Progress]
+
+    FavDetail --> Favs
+    AskAI --> Chat
+
+    Favs["❤️ Favorites Page\nLocalStorage persisted"]
+    Favs --> ViewDetail[View Recipe Detail]
+    Favs --> AISuggest[AI Suggestion Strip]
+    ViewDetail --> Detail
+    AISuggest --> Recs
+
+    NavMeal --> MealDuration[Select Duration: 3 / 5 / 7 days]
+    MealDuration --> MealGen["📅 AI Generates Full Meal Plan\nBreakfast · Lunch · Dinner · Snack"]
+    MealGen --> SlotRegen[Regenerate Individual Slot]
+    MealGen --> ShoppingList[Generate Shopping List]
+    ShoppingList --> DownloadList[Download / Copy List]
+
+    NavChat --> Chat["💬 AI Cooking Assistant\nMulti-turn streaming chat"]
+    Chat --> Q1[Ingredient Substitutions]
+    Chat --> Q2[Cooking Tips & Techniques]
+    Chat --> Q3[Recipe Explanations]
+    Chat --> Q4[Healthier Alternatives]
+```
+
 ## 🎨 Design Rationale
 
 ### Color Palette — Azure Coral
+
 Blue (#2563EB) communicates trust, intelligence, and AI capability — perfect for an AI-powered product. Coral (#F26B4E) evokes warmth, culinary richness, and the tangible pleasure of food. Together on a predominantly white canvas, they create a clean, modern cooking app that feels both smart and inviting.
 
 ### Typography
+
 - **DM Serif Display** — all recipe titles and page hero headings: editorial warmth and craft
 - **Plus Jakarta Sans** — all UI text: modern, legible, friendly
 
 ### Recipe Images
+
 Recipe images are replaced with semantically-matched Lucide icon illustrations for performance, uniqueness, and to avoid dependency on external image APIs. The `RecipeImagePlaceholder` component maps each recipe to a contextual icon based on `imageIcon` field and cuisine keyword matching, with a matching gradient background.
 
 ## 🏗 Architecture Decisions
@@ -65,7 +117,7 @@ Recipe images are replaced with semantically-matched Lucide icon illustrations f
 
 ```bash
 git clone [repo]
-cd chefai
+cd Cook-Ai-Assessment
 npm install
 cp .env.example .env
 # Add your Gemini API key to .env:  VITE_GEMINI_API_KEY=your_key_here
@@ -76,15 +128,15 @@ Get a free Gemini API key at: https://aistudio.google.com
 
 ## 📦 Dependencies
 
-| Package | Purpose |
-|---|---|
-| `react` / `react-dom` | UI framework |
-| `react-router-dom` v6 | Client-side routing with lazy loading |
-| `zustand` | Global state with localStorage persistence |
-| `framer-motion` | Page transitions, micro-interactions, reduced motion |
-| `lucide-react` | All icons — no image files |
-| `@google/generative-ai` | Gemini API with streaming |
-| `tailwindcss` | Utility-first styling with custom token extension |
+| Package                 | Purpose                                              |
+| ----------------------- | ---------------------------------------------------- |
+| `react` / `react-dom`   | UI framework                                         |
+| `react-router-dom` v6   | Client-side routing with lazy loading                |
+| `zustand`               | Global state with localStorage persistence           |
+| `framer-motion`         | Page transitions, micro-interactions, reduced motion |
+| `lucide-react`          | All icons — no image files                           |
+| `@google/generative-ai` | Gemini API with streaming                            |
+| `tailwindcss`           | Utility-first styling with custom token extension    |
 
 ## 🌐 Deployment (Vercel)
 
@@ -126,7 +178,3 @@ vercel
 2. **Streaming in React**: Managing streaming state across re-renders without causing infinite loops. Solution: `updateLastMessage()` in chatStore does in-place content update on the last array item; `finalizeLastMessage()` clears the `isStreaming` flag once the stream ends.
 
 3. **Progressive JSON parsing**: Streaming returns partial JSON — standard `JSON.parse` fails on partials. Solution: `extractCompleteObjects()` in `recipeParser.js` scans for balanced `{...}` by tracking brace depth, extracting complete objects as they arrive.
-
-4. **No images policy**: Maintaining visual richness without photos. Solution: `RecipeImagePlaceholder` maps `imageIcon` field (constrained enum in the prompt schema) and cuisine keywords to Lucide icons with matching gradient backgrounds.
-
-5. **Meal planner grid at 7 days × 4 meals = 28 cards**: Solution: `React.memo` on `MealSlot` and `DayColumn`, horizontal scroll container to avoid layout reflow, individual slot regeneration replaces only that cell.
