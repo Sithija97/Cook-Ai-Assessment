@@ -4,7 +4,7 @@ import { RecipeCard } from './RecipeCard'
 import { mockRecipe, mockEasyRecipe, mockHardRecipe } from '../../stories/mockData'
 
 const meta: Meta<typeof RecipeCard> = {
-  title: 'Recipe/RecipeCard',
+  title: 'Organisms/RecipeCard',
   component: RecipeCard,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

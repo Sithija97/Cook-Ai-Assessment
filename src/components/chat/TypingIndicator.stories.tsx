@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { TypingIndicator } from './TypingIndicator'
 
 const meta: Meta<typeof TypingIndicator> = {
-  title: 'Chat/TypingIndicator',
+  title: 'Organisms/TypingIndicator',
   component: TypingIndicator,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],

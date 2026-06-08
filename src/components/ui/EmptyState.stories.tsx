@@ -3,7 +3,7 @@ import { ChefHat, Heart, Search, Calendar } from 'lucide-react'
 import { EmptyState } from './EmptyState'
 
 const meta: Meta<typeof EmptyState> = {
-  title: 'UI/EmptyState',
+  title: 'Molecules/EmptyState',
   component: EmptyState,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

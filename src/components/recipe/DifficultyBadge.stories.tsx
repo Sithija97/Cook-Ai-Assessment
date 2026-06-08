@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DifficultyBadge } from './DifficultyBadge'
 
 const meta: Meta<typeof DifficultyBadge> = {
-  title: 'Recipe/DifficultyBadge',
+  title: 'Atoms/DifficultyBadge',
   component: DifficultyBadge,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RecipeCardSkeleton } from './RecipeCardSkeleton'
 
 const meta: Meta<typeof RecipeCardSkeleton> = {
-  title: 'Recipe/RecipeCardSkeleton',
+  title: 'Organisms/RecipeCardSkeleton',
   component: RecipeCardSkeleton,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

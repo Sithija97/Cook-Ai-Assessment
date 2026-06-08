@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 // ─── Colour swatch ───────────────────────────────────────────────────────────
 
-function Swatch({ name, hex, textWhite = false }: { name: string; hex: string; textWhite?: boolean }) {
+function Swatch({ name, hex }: { name: string; hex: string; textWhite?: boolean }) {
   return (
     <div style={{ textAlign: 'center' }}>
       <div
@@ -133,14 +133,14 @@ function DesignTokensPage() {
       <Section title="Spacing">
         <div style={{ display: 'flex', gap: 20, alignItems: 'flex-end', flexWrap: 'wrap', background: '#F8FAFC', borderRadius: 12, padding: 20 }}>
           {[
-            { token: 'xs',  px: 4,  tw: 'p-1'  },
-            { token: 'sm',  px: 8,  tw: 'p-2'  },
-            { token: 'md',  px: 16, tw: 'p-4'  },
-            { token: 'lg',  px: 24, tw: 'p-6'  },
-            { token: 'xl',  px: 32, tw: 'p-8'  },
-            { token: '2xl', px: 48, tw: 'p-12' },
-            { token: '3xl', px: 64, tw: 'p-16' },
-          ].map(({ token, px, tw }) => (
+            { token: 'xs',  px: 4  },
+            { token: 'sm',  px: 8  },
+            { token: 'md',  px: 16 },
+            { token: 'lg',  px: 24 },
+            { token: 'xl',  px: 32 },
+            { token: '2xl', px: 48 },
+            { token: '3xl', px: 64 },
+          ].map(({ token, px }) => (
             <div key={token} style={{ textAlign: 'center' }}>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 6 }}>
                 <div style={{ width: px, height: px, background: '#2563EB', opacity: 0.25, borderRadius: 4, minWidth: 4 }} />
@@ -207,10 +207,10 @@ function DesignTokensPage() {
         <Label>Contrast Ratios (WCAG AA requires 4.5:1 for normal text)</Label>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
           {[
-            { fg: '#2563EB', bg: '#FFFFFF', label: 'blue-500 on white',  ratio: '4.54:1', pass: true },
-            { fg: '#E05535', bg: '#FFFFFF', label: 'coral-600 on white', ratio: '4.61:1', pass: true },
-            { fg: '#F26B4E', bg: '#FFFFFF', label: 'coral-500 on white', ratio: '3.24:1', pass: false },
-          ].map(({ fg, bg, label, ratio, pass }) => (
+            { fg: '#2563EB', label: 'blue-500 on white',  ratio: '4.54:1', pass: true },
+            { fg: '#E05535', label: 'coral-600 on white', ratio: '4.61:1', pass: true },
+            { fg: '#F26B4E', label: 'coral-500 on white', ratio: '3.24:1', pass: false },
+          ].map(({ fg, label, ratio, pass }) => (
             <div key={label} style={{ background: '#F8FAFC', borderRadius: 10, padding: 16, border: '1px solid #E2E8F0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                 <div style={{ width: 24, height: 24, borderRadius: 6, background: fg }} />
@@ -256,7 +256,7 @@ function DesignTokensPage() {
 // ─── Story export ─────────────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: 'Design System/Design Tokens',
+  title: 'Foundation/Design Tokens',
   parameters: {
     layout: 'fullscreen',
     backgrounds: { default: 'white' },

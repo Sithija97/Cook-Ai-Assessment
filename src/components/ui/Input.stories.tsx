@@ -3,7 +3,7 @@ import { Search, Mail, Lock } from 'lucide-react'
 import { Input } from './Input'
 
 const meta: Meta<typeof Input> = {
-  title: 'UI/Input',
+  title: 'Atoms/Input',
   component: Input,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

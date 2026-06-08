@@ -8,7 +8,7 @@ import {
 } from '../../stories/mockData'
 
 const meta: Meta<typeof ChatBubble> = {
-  title: 'Chat/ChatBubble',
+  title: 'Organisms/ChatBubble',
   component: ChatBubble,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
