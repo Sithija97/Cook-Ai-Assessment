@@ -11,9 +11,7 @@ const meta: Meta<typeof MealSlot> = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <div className="w-48">
-          <Story />
-        </div>
+        <Story />
       </MemoryRouter>
     ),
   ],
@@ -27,42 +25,37 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Empty: Story = {
-  args: {
-    mealType: 'breakfast',
-    recipe: null,
-    onRegenerate: () => {},
-    onRemove: () => {},
-  },
+  render: () => (
+    <div className="w-48">
+      <MealSlot mealType="breakfast" recipe={null} onRegenerate={() => {}} onRemove={() => {}} />
+    </div>
+  ),
 }
 
 export const WithRecipe: Story = {
-  args: {
-    mealType: 'lunch',
-    recipe: mockRecipe,
-    onRegenerate: () => {},
-    onRemove: () => {},
-  },
+  render: () => (
+    <div className="w-48">
+      <MealSlot mealType="lunch" recipe={mockRecipe} onRegenerate={() => {}} onRemove={() => {}} />
+    </div>
+  ),
 }
 
 export const Regenerating: Story = {
-  args: {
-    mealType: 'dinner',
-    recipe: null,
-    onRegenerate: () => {},
-    onRemove: () => {},
-    isRegenerating: true,
-  },
+  render: () => (
+    <div className="w-48">
+      <MealSlot mealType="dinner" recipe={null} onRegenerate={() => {}} onRemove={() => {}} isRegenerating />
+    </div>
+  ),
 }
 
 export const AllMealTypes: Story = {
+  parameters: { layout: 'padded' },
   render: () => (
-    <MemoryRouter>
-      <div className="grid grid-cols-4 gap-3 w-[800px]">
-        <MealSlot mealType="breakfast" recipe={mockEasyRecipe} onRegenerate={() => {}} onRemove={() => {}} />
-        <MealSlot mealType="lunch"     recipe={mockRecipe}     onRegenerate={() => {}} onRemove={() => {}} />
-        <MealSlot mealType="dinner"    recipe={null}           onRegenerate={() => {}} onRemove={() => {}} />
-        <MealSlot mealType="snack"     recipe={null}           onRegenerate={() => {}} onRemove={() => {}} isRegenerating />
-      </div>
-    </MemoryRouter>
+    <div className="grid grid-cols-4 gap-3 w-[800px]">
+      <MealSlot mealType="breakfast" recipe={mockEasyRecipe} onRegenerate={() => {}} onRemove={() => {}} />
+      <MealSlot mealType="lunch"     recipe={mockRecipe}     onRegenerate={() => {}} onRemove={() => {}} />
+      <MealSlot mealType="dinner"    recipe={null}           onRegenerate={() => {}} onRemove={() => {}} />
+      <MealSlot mealType="snack"     recipe={null}           onRegenerate={() => {}} onRemove={() => {}} isRegenerating />
+    </div>
   ),
 }

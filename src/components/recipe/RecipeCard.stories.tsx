@@ -11,9 +11,7 @@ const meta: Meta<typeof RecipeCard> = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <div className="w-72">
-          <Story />
-        </div>
+        <Story />
       </MemoryRouter>
     ),
   ],
@@ -23,32 +21,24 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Medium: Story = {
-  args: { recipe: mockRecipe },
+  render: () => <div className="w-72"><RecipeCard recipe={mockRecipe} /></div>,
 }
 
 export const Easy: Story = {
-  args: { recipe: mockEasyRecipe },
+  render: () => <div className="w-72"><RecipeCard recipe={mockEasyRecipe} /></div>,
 }
 
 export const Hard: Story = {
-  args: { recipe: mockHardRecipe },
+  render: () => <div className="w-72"><RecipeCard recipe={mockHardRecipe} /></div>,
 }
 
 export const Grid: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter>
-        <div className="grid grid-cols-3 gap-4 w-[900px]">
-          <Story />
-        </div>
-      </MemoryRouter>
-    ),
-  ],
+  parameters: { layout: 'padded' },
   render: () => (
-    <>
+    <div className="grid grid-cols-3 gap-4 w-[900px]">
       <RecipeCard recipe={mockEasyRecipe} />
       <RecipeCard recipe={mockRecipe} />
       <RecipeCard recipe={mockHardRecipe} />
-    </>
+    </div>
   ),
 }

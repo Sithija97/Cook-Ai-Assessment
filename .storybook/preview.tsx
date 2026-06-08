@@ -1,7 +1,15 @@
 import type { Preview } from '@storybook/react-vite'
+import { MotionConfig } from 'framer-motion'
 import '../src/index.css'
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <MotionConfig reducedMotion="always">
+        <Story />
+      </MotionConfig>
+    ),
+  ],
   parameters: {
     options: {
       storySort: {
